@@ -13,7 +13,7 @@ public class GenerateKey {
         }
 
 
-
+        System.out.println("Dlugosc wyrazenia: " + key.length());
         return key;
     }
 }

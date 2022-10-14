@@ -26,7 +26,7 @@ public class ReadAsciiNumbers {
         for(Character c:shuffle){
             abc = abc + c;
         }
-        System.out.println(abc);
+        //System.out.println(abc);
         return abc;
     }
 }

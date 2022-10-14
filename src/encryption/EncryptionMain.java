@@ -70,7 +70,7 @@ public class EncryptionMain implements ActionListener{
         word.setFont(myFont);
         //word.setPreferredSize(new Dimension(250,35));
         word.setBounds(35,35,540,35);
-        word.setText("testWord");
+        word.setText("te st");
 
         encrWordLabel = new JLabel("Your encrypted word: (copy it after encrypt!!!)");
         encrWordLabel.setFont(new Font(Font.MONOSPACED,Font.BOLD, 15));
@@ -124,7 +124,6 @@ public class EncryptionMain implements ActionListener{
     }
     public static void main(String[] args) {
         EncryptionMain e = new EncryptionMain();
-
     }
 
     @Override
@@ -135,40 +134,27 @@ public class EncryptionMain implements ActionListener{
             EncryptWord x = new EncryptWord();
             String myWord = word.getText(), myKey = x.encryptW(myWord, 0), keyLine = "";
             System.out.println(myWord);
+            keyWord.setText(myKey);
+            encrWord.setText(x.encryptW(myWord,1));
+
+
 
             //encrWord.setText(x.encryptW(key,1));
-            System.out.println("### SŁOWA PRZED SZYFROWANIEM ###");
+            /*System.out.println("### SŁOWA PRZED SZYFROWANIEM ###");
             System.out.println(myWord);
             System.out.println(myKey);
-            System.out.println(keyLine);
-
-            keyWord.setText(myKey);
-            for(int keyTable=0; keyTable<myKey.length()+1;keyTable++){
-                if (keyTable % 72 != 0 || keyTable == 0){
-                    keyLine = keyLine + myKey.charAt(keyTable);
-                }
-                else{
-                    System.out.println(keyLine + "\n");
-                    keyLine = "";
-                }
-            }
-            System.out.println("### SŁOWA PO SZYFROWANIU ###");
+            System.out.println(keyLine);*/
+            /*System.out.println("### SŁOWA PO SZYFROWANIU ###");
             System.out.println(myWord);
             System.out.println(myKey);
-            System.out.println(keyLine);
-
-
+            System.out.println(keyLine);*/
         }
         if(e.getSource() == decode){
             //take key & encrypted word -> decrypt -> insert word
             //System.out.println("DECODING");
-
             word.setText("Decoding word...");
             encrWord.setText("testEncryptedWord");
             keyWord.setText("Input your Key (copy from board)");
-
-
-
         }
     }
 
