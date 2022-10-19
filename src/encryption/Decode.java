@@ -29,14 +29,10 @@ public class Decode {
          */
         int counter = 0;
         for(Character wordToTable:encryptedWord.toCharArray()){
-            if(wordToTable == ':'){
-                decodedWord.add(' ');
-                counter++;
-            }
-            else{
+
                 decodedWord.add(decoding(wordToTable,keyList.get(counter)));
                 counter++;
-            }
+
         }
         /**
          * list to string

@@ -55,13 +55,6 @@ public class EncryptWord {
                     encWord.add(keyTable[g].charAt(71-counter));
                     break;
                 }
-                if(word.charAt(g) == 32){
-                    /**
-                     * space is replaced by ":" symbol
-                     */
-                    encWord.add(':');
-                    break;
-                }
                 if(counter==71){
                     /**
                      * other case (character is not in key array)

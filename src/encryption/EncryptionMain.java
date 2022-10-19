@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.*;
+import java.util.HashMap;
+
 
 public class EncryptionMain implements ActionListener{
 
@@ -16,7 +18,7 @@ public class EncryptionMain implements ActionListener{
     JTextArea keyWord;
     JPanel bottomPanel, upperPanel, textPanel;
     JButton decode, encrypt;
-    JButton copyBtn, copyWord, clearAll, jsonBtn;
+    JButton copyBtn, copyWord, clearAll, hashMapBtn;
     JLabel upperLabel, bottomLabel;
     JLabel wordLabel, encrWordLabel, keyWordLabel;
     Font myFont = new Font(Font.SANS_SERIF,Font.BOLD,20);
@@ -26,7 +28,7 @@ public class EncryptionMain implements ActionListener{
      */
     EncryptionMain(){
         //settings for main window app
-        mainWindow = new JFrame("Encryption Program");
+        mainWindow = new JFrame("Encryption program");
         mainWindow.setIconImage(keyIcon.getImage());
         mainWindow.setLayout(null);
         mainWindow.setSize(800,600);
@@ -41,7 +43,8 @@ public class EncryptionMain implements ActionListener{
         bottomPanel.setBackground(new Color(40, 32, 37, 146));
         bottomPanel.setFont(myFont);
 
-        bottomLabel = new JLabel("Wersja programu: alpha 10/2022.");
+        bottomLabel = new JLabel("Author: https://github.com/navr0 Version: alpha, 10/2022");
+
         bottomLabel.setFont(new Font(Font.MONOSPACED,Font.BOLD,15));
         bottomLabel.setForeground(Color.white);
         bottomPanel.add(bottomLabel);
@@ -52,7 +55,7 @@ public class EncryptionMain implements ActionListener{
         upperPanel.setBackground(new Color(40, 32, 37, 146));
         upperPanel.setFont(myFont);
 
-        upperLabel = new JLabel("Program Szyfrujący");
+        upperLabel = new JLabel("Encryption program");
         upperLabel.setFont(new Font(Font.MONOSPACED,Font.BOLD,40));
         upperLabel.setForeground(Color.white);
         upperPanel.add(upperLabel);
@@ -65,7 +68,7 @@ public class EncryptionMain implements ActionListener{
         textPanel.isFocusable();
         textPanel.setLayout(null);
 
-        wordLabel = new JLabel("Type your word:");
+        wordLabel = new JLabel("Enter your word:");
         wordLabel.setFont(new Font(Font.MONOSPACED,Font.BOLD, 15));
         wordLabel.setBounds(35,5,540,35);
         wordLabel.setForeground(Color.white);
@@ -75,9 +78,9 @@ public class EncryptionMain implements ActionListener{
         word.setColumns(20);
         word.setFont(myFont);
         word.setBounds(35,35,540,35);
-        word.setText("te st");
+        word.setText("TEST");
 
-        encrWordLabel = new JLabel("Your encrypted word: (copy it after encrypt!!!)");
+        encrWordLabel = new JLabel("Encrypted word:");
         encrWordLabel.setFont(new Font(Font.MONOSPACED,Font.BOLD, 15));
         encrWordLabel.setBounds(35,75,540,35);
         encrWordLabel.setForeground(Color.white);
@@ -87,9 +90,9 @@ public class EncryptionMain implements ActionListener{
         encrWord.setColumns(20);
         encrWord.setFont(myFont);
         encrWord.setBounds(35,105,540,35);
-        encrWord.setText("testEncrWord");
+        encrWord.setText("");
 
-        keyWordLabel = new JLabel("Your special key: (copy it after encrypt!!!)");
+        keyWordLabel = new JLabel("Your key:");
         keyWordLabel.setFont(new Font(Font.MONOSPACED,Font.BOLD, 15));
         keyWordLabel.setBounds(35,145,540,35);
         keyWordLabel.setForeground(Color.white);
@@ -100,7 +103,7 @@ public class EncryptionMain implements ActionListener{
         keyWord.setLineWrap(true);
         keyWord.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 12));
         keyWord.setBounds(35,175,540,95);
-        keyWord.setText("testKey");
+        keyWord.setText("");
 
         // button responsible for decoding word
         decode = new JButton("Decode");
@@ -127,18 +130,18 @@ public class EncryptionMain implements ActionListener{
         copyWord.addActionListener(this);
 
         // button responsible for clear all program windows
-        clearAll = new JButton("Clear");
+        clearAll = new JButton("Clear all");
         clearAll.setBounds(370,295,120,35);
         clearAll.setLayout(null);
         clearAll.addActionListener(this);
 
-        // button responsible for convert data to JSON format
-        jsonBtn = new JButton("to JSON");
-        jsonBtn.setBounds(520,295,120,35);
-        jsonBtn.setLayout(null);
-        jsonBtn.addActionListener(this);
+        // button responsible for convert data to HashMap format
+        hashMapBtn = new JButton("to HashMap");
+        hashMapBtn.setBounds(520,295,120,35);
+        hashMapBtn.setLayout(null);
+        hashMapBtn.addActionListener(this);
 
-        textPanel.add(jsonBtn);
+        textPanel.add(hashMapBtn);
         textPanel.add(clearAll);
         textPanel.add(copyWord);
         textPanel.add(copyBtn);
@@ -179,7 +182,6 @@ public class EncryptionMain implements ActionListener{
             String[] myKey = x.encryptW(myWord);
             encrWord.setText(myKey[1]);
             keyWord.setText(myKey[0]);
-
         }
         /** decoding the word
          *  inputs: encryptedWord, keyWord
@@ -214,6 +216,19 @@ public class EncryptionMain implements ActionListener{
             keyWord.setText("");
             encrWord.setText("");
         }
+
+        if(e.getSource() == hashMapBtn){
+            HashMap<String,String> hashMapKey = new HashMap<String, String>();
+            hashMapKey.put("pass", encrWord.getText());
+            hashMapKey.put("key", keyWord.getText());
+
+            StringSelection copy = new StringSelection(hashMapKey.toString());
+            Clipboard cp = Toolkit.getDefaultToolkit().getSystemClipboard();
+            cp.setContents(copy, null);
+
+            //System.out.println(hashMapKey);
+        }
+
     }
 
 }
